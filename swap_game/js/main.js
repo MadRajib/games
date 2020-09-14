@@ -111,6 +111,10 @@ onload = function () {
   function swapCells() {
     grid.swapCells()
   }
+
+  $('#swap_button').click(function() {
+    grid.swapCells();
+  });
 }
 
 
