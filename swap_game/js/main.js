@@ -1,18 +1,4 @@
 let g_selected = null;
-// window.addEventListener('load', function() {
-//   document.querySelector('input[type="file"]').addEventListener('change', function() {
-//       if (this.files && this.files[0]) {
-//           var img = document.querySelector('img');  // $('img')[0]
-//           img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-//           img.onload = imageIsLoaded;
-//       }
-//   });
-// });
-
-// function imageIsLoaded() { 
-//   alert(this.src);  // blob url
-//   // update width and height ...
-// }
 
 function CreateNumbers(range) {
   var number_list = Array.from({length: range-1}, (_, i) => i + 1)
@@ -116,8 +102,6 @@ onload = function () {
     grid.swapCells();
   });
 }
-
-
 
 
 class Grid {
@@ -327,7 +311,7 @@ class Cell {
     this.normalStrokeWidth = 2;
     this.labelTxt = label;
 
-    this.labelOffset = {'x': 20, 'y':40}
+    this.labelOffset = {'x': 18, 'y':34}
   }
 
   // calculates the pixel location 
@@ -339,15 +323,19 @@ class Cell {
   deSelect() {
     this.selected = false;
     // apply original style 
-    this.cell.select("#box").attr({
-      strokeWidth: this.normalStrokeWidth,
+    // this.cell.select("#box").attr({
+    //   strokeWidth: this.normalStrokeWidth,
+    // })
+
+    this.cell.select("#border").attr({
+      fill: (this.cellType === 0) ? "#ffffff" : "#bada55",
     })
   }
 
   select(){
     this.selected = true;
-    this.cell.select("#box").attr({
-      strokeWidth: 5,
+    this.cell.select("#border").attr({
+      fill: "#000000"
     })
 
   }
@@ -355,9 +343,17 @@ class Cell {
   draw(s) {
     // initialize the snap object
     
-    
-    let box = s.rect(0,0,this.width, this.height);
+    let border = s.rect(0,0,this.width,this.height);
+    let box = s.rect(4,4,this.width-8, this.height-8);
     let label = s.text(this.labelOffset.x,this.labelOffset.y)
+    
+
+    border.attr({
+      id:"border",
+      fill: (this.cellType === 0) ? "#ffffff" : "#bada55",
+      stroke: "#000",
+      strokeWidth: this.normalStrokeWidth
+    })
 
     label.attr({
       id:"label",
@@ -368,11 +364,9 @@ class Cell {
     box.attr({
       id:"box",
       fill: (this.cellType === 0) ? "#ffffff" : "#bada55",
-      stroke: "#000",
-      strokeWidth: this.normalStrokeWidth
     });
 
-    this.cell = s.group(box,label);
+    this.cell = s.group(border,box,label);
     this.cell.attr({
       transform : "translate("+this.pos.x+","+this.pos.y+")"
     })
@@ -392,11 +386,7 @@ class Cell {
         // save this cell in the global selected var 
         g_selected = this;
 
-        this.selected = true;
-        // change the box style con selected
-        this.cell.select("#box").attr({
-          strokeWidth: 5,
-        })
+        g_selected.select();
       }
 
     });
