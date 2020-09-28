@@ -1,0 +1,32 @@
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.game-grid {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: grey;
+}
+
+.game-grid .cell {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-grid .b{
+  background-color: #d90429;
+}
+
+.game-grid .v{
+  background-color: #2b2d42;
+}
+
+.game-grid .checked{
+  background-color:#8d99ae;
+}
