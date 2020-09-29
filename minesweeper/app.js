@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       
       cell.classList.add("cell",temp_cells[i]);
       cell.setAttribute('id',i);
+      cell.innerHTML = temp_cells[i];
       
       outer_cell.appendChild(cell);
       GRID.appendChild(outer_cell); // append the div to the grid
@@ -48,14 +49,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     }  
 
-
-
-
     // create bomb counts for each cell
     for (let i = 0; i < cells.length; i++){
 
       let x = i % width;
       let y = (i / width) | 0; //floor the number
+      
+      // debugger;
 
       const v_class = cells[i].classList.contains('v');
 
@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     
       let bomb_count = 0;
+      
 
       // check left
       if((x-1>= 0) && cells[i-1].classList.contains('b')) bomb_count++;
@@ -83,6 +84,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       // set total bomb count as data
       cells[i].setAttribute('data',bomb_count);
+      cells[i].innerHTML = cells[i].innerHTML +":" + bomb_count;
       
     }
 
@@ -132,9 +134,10 @@ document.addEventListener("DOMContentLoaded",()=>{
         return;
       }
       
+      cell.classList.add("checked");
       // If data = 0 cell is clicked recursively call every neighbor cells 
       checkCells(cell);
-      cell.classList.add("checked");
+      
     }
     
     
