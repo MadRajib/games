@@ -22,7 +22,8 @@ body {
 }
 
 .game-grid {
-  margin: 2px;
+  margin-left: 4px;
+  margin-right: 4px;
   width: 400px;
   height: 400px;
   display: flex;
