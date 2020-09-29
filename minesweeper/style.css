@@ -10,7 +10,6 @@ html {
 body {
   display: table-cell;
   vertical-align: middle;
-  overflow-x: hidden !important;
   
 }
 
@@ -23,8 +22,6 @@ body {
 }
 
 .game-grid {
-  margin-left: 2px;
-  margin-right: 2px;
   width: 400px;
   height: 400px;
   display: flex;
