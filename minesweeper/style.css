@@ -10,6 +10,7 @@ html {
 body {
   display: table-cell;
   vertical-align: middle;
+  overflow-x: hidden !important;
   
 }
 
