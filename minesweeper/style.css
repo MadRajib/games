@@ -47,8 +47,8 @@ body {
 }
 
 .game-grid .b{
-  /* background-color: #2b2d42; */
-  background-color: azure;
+  background-color: #2b2d42;
+  /* background-color: azure; */
 }
 
 .game-grid .v{

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       
       cell.classList.add("cell",temp_cells[i]);
       cell.setAttribute('id',i);
-      cell.innerHTML = temp_cells[i];
+      // cell.innerHTML = temp_cells[i];
       
       outer_cell.appendChild(cell);
       GRID.appendChild(outer_cell); // append the div to the grid
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       // set total bomb count as data
       cells[i].setAttribute('data',bomb_count);
-      cells[i].innerHTML = cells[i].innerHTML +":" + bomb_count;
+      // cells[i].innerHTML = cells[i].innerHTML +":" + bomb_count;
       
     }
 
