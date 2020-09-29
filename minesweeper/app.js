@@ -23,12 +23,17 @@ document.addEventListener("DOMContentLoaded",()=>{
     // create the cells with respective classes
 
     for (let i = 0; i < CELLS_COUNT; i++) {
-      const cell = document.createElement('div')
+      
+      const outer_cell = document.createElement('div')
+      outer_cell.classList.add("outer-cell");
+      
+      const cell = document.createElement('div');
       
       cell.classList.add("cell",temp_cells[i]);
       cell.setAttribute('id',i);
       
-      GRID.appendChild(cell); // append the div to the grid
+      outer_cell.appendChild(cell);
+      GRID.appendChild(outer_cell); // append the div to the grid
       
       cells.push(cell); // save cell for future use
 
@@ -186,7 +191,7 @@ function checkCells(cell) {
       cell_clicked(leftDown);
     }
 
-  },10)
+  },100)
 }
 
 
@@ -194,9 +199,13 @@ function gameOver(cell) {
     console.log("Game Over!");
     isGameOver = true;
 
+    const instructions = document.querySelector(".instructions");
+    instructions.innerHTML = "💥 BomB! 💥 Game Over! <br>Reload for New Game!";
+
     cells.forEach(cell =>{
       if(cell.classList.contains('b')){
         cell.innerHTML = "💣";
+        cell.style.backgroundColor = '#d90429';
       }
     })
 }
@@ -212,8 +221,9 @@ function CheckForWin() {
     }
 
     if(match_count === BOMBS_COUNT){
-      console.log("you win");
-      alert("Madrajib: Cool!")
+      const instructions = document.querySelector(".instructions");
+      instructions.innerHTML = "🎉Cool You Won!🎉 <br>Reload for New Game!";
+      // alert("Madrajib: Cool!")
     }
   }
 }

@@ -12,28 +12,45 @@ body {
   vertical-align: middle;
 }
 
+.instructions{
+  margin: auto;
+  margin-bottom: 20px;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
 .game-grid {
   width: 400px;
   height: 400px;
   display: flex;
   flex-wrap: wrap;
-  background-color: grey;
+  background-color: #2b2d42;
 }
 
 .game-grid .cell {
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   justify-content: center;
   align-items: center;
 }
 
+.game-grid .outer-cell{
+  border: #8d99ae;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: #8d99ae;
+}
+
 .game-grid .b{
-  background-color: #d90429;
+  background-color: #2b2d42;
 }
 
 .game-grid .v{
-  background-color: #2b2d42;
+  background-color:  #2b2d42;
 }
 
 .game-grid .checked{
