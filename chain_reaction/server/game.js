@@ -1,5 +1,5 @@
 const {
-  GRID_SIZE
+  GRID_SIZE,
 } = require('./constants');
 
 const MAX_PLAYERS = 4;
@@ -34,21 +34,23 @@ function createGameState() {
 }
 
 function createNewPlayer(state) {
-  let prev_count = state.players_count;
+  // console.log("players",state.players_count,MAX_PLAYERS);
+  if (state.players_count >= MAX_PLAYERS){
+    return;
+  }
+  // console.log("hel");
 
-  if (prev_count >= MAX_PLAYERS) return;
-
-  const color = getColorCode(prev_count);
+  
+  const color = getColorCode(state.players_count);
   if (!color) return;
-  let player_number = prev_count + 1;
 
   const player = {
-    number: player_number,
+    number: ++state.players_count,
     color: color
   };
 
   state.players.push(player);
-  state.players_count++;
+  // console.log("players",state.players_count);
 }
 
 function gameLoop(state) {
@@ -81,7 +83,7 @@ function gameLoop(state) {
     for (var key in dic){
       if(occupied_cell_count === dic[key]){
 
-        console.log(key);
+        // console.log(key);
         return key;
       }
     }
@@ -125,7 +127,7 @@ function createCell(player, count, coord) {
 }
 
 function getColorCode(index) {
-  if (index + 1 >= MAX_PLAYERS) return;
+  if (index -1 >= MAX_PLAYERS) return;
   return COLORS_CODE[index];
 }
 

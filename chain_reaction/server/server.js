@@ -58,11 +58,11 @@ io.on('connection',client =>{
     if(allUsers) {
       numClients = Object.keys(allUsers).length;
     }
-
+    // console.log(numClients,MAX_PLAYERS)
     if(numClients === 0){
       client.emit('unknownCode');
       return;
-    }else if(numClients > MAX_PLAYERS) {
+    }else if(numClients+1 > MAX_PLAYERS) {
       client.emit('tooManyPlayers');
       return;
     }
@@ -72,7 +72,7 @@ io.on('connection',client =>{
 
     client.join(gameCode);
     client.number = numClients + 1;
-    client.emit('init', numClients + 1);
+    client.emit('init', client.number);
     client.emit('gameCode',gameCode);
 
     createNewPlayer(state[gameCode]);
