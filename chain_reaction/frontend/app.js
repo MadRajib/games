@@ -8,6 +8,7 @@ const roomScreen = document.getElementById('roomScreen');
 
 const g_gameCodeDisplay = document.getElementById('g_gameCodeDisplay');
 const g_totalPlayerDisplay  = document.getElementById('g_totalPlayerDisplay');
+const g_playerTurn = document.getElementById('g_playerTurn');
 
 const r_gameCodeDisplay = document.getElementById('r_gameCodeDisplay');
 const r_totalPlayerDisplay  = document.getElementById('r_totalPlayerDisplay');
@@ -17,6 +18,7 @@ const joinGameBtn = document.getElementById('joinGameButton');
 const startGameBtn = document.getElementById('startGameButton');
 
 const gameCodeInput = document.getElementById('gameCodeInput');
+
 
 
 startGameBtn.addEventListener('click',startGame);
@@ -55,15 +57,16 @@ function joinGame() {
   initialScreen.style.display = "none";
   roomScreen.style.display = "block";
   startGameBtn.style.display = "none";
-
 }
 
-const socket = io('https://chain-reaction-multi.herokuapp.com/');
+// const socket = io('https://chain-reaction-multi.herokuapp.com/');
 
+const socket = io('http://localhost:3000/');
 socket.on('init',handleInit);
 socket.on('gameCode',handleGameCode);
 socket.on('gameState',handleGameState);
 socket.on('gameOver',handleGameOver);
+socket.on('playerTurn',handlePlayerTurn);
 socket.on('unknownCode', handleUnknownCode);
 socket.on('tooLowPlayers', handleTooLowPlayers);
 socket.on('tooManyPlayers', handleTooManyPlayers);
@@ -91,7 +94,7 @@ function init() {
 
   ctx = canvas.getContext('2d');
 
-  canvas.width = canvas.height = 600;
+  canvas.width = canvas.height = 360;
 
   ctx.fillStyle = BG_COLOR;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -144,14 +147,16 @@ function paintPlayer(player,cell,width,height) {
   
   let offset = [[0,0]];
   if(cell.count === 2){
-    offset = [[-10,0],[10,0]];
+    offset = [[-8,0],[8,0]];
   }else if(cell.count === 3){
-    offset = [[-10,11],[0,-5],[10,11]];
+    offset = [[-5,8],[0,-4],[8,8]];
   }
 
+  if(cell.count>3) return;
   for(let i = 0;i< cell.count;i++){  
+    
     ctx.beginPath();
-    ctx.arc(cell.x * width + width/2 + offset[i][0], cell.y*height + height/2 + offset[i][1], 10, 0, 2 * Math.PI);
+    ctx.arc(cell.x * width + width/2 + offset[i][0], cell.y*height + height/2 + offset[i][1], 8, 0, 2 * Math.PI);
     ctx.fillStyle = player.color;
     ctx.strokeStyle = "#fff";
     ctx.stroke();
@@ -171,7 +176,6 @@ function handleInit(player_number) {
 function handleStartGame(data){
   gameActive = true;
   init();
-  console.log(data);
 
 }
 
@@ -190,8 +194,10 @@ function handleGameOver(data) {
 
   if(data.winner === playerNumber){
     alert("your win!");
+    g_playerTurn.innerText = "🎊 Hurray!🎊\n🎉👏You Won!👏🎉";
   }else{
     alert("your lose");
+    g_playerTurn.innerText = "👏 😵You Lose!😵 👏";
   }
 
   gameActive = false;
@@ -213,7 +219,9 @@ function handleTooManyPlayers() {
 }
 
 function handleTooLowPlayers(){
-  reset();
+  initialScreen.style.display = "none";
+  roomScreen.style.display = "block";
+  startGameBtn.style.display = "block";
   alert('No Players In the Room');
 }
 
@@ -231,4 +239,8 @@ function handleNewPlayer(data){
   const count = JSON.parse(data);
   g_totalPlayerDisplay.innerText = count.count;
   r_totalPlayerDisplay.innerText = count.count;
+}
+
+function handlePlayerTurn(data){
+  g_playerTurn.innerText = (parseInt(data) === playerNumber)?"🤗Your Turn!🤗":"😒 Player-"+data+" Turn!";
 }

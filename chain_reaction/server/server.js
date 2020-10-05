@@ -37,6 +37,7 @@ io.on('connection',client =>{
 
     state[roomCode].active = true;
     emitStartGame(roomCode);
+    emitTurn(roomCode,1);
     startGameInterval(roomCode);
   
   }
@@ -99,7 +100,7 @@ io.on('connection',client =>{
 
     if(!roomName) return;
     updateBoard(client.number,state[roomName],coordinate);
-    
+    emitTurn(roomName,state[roomName].turn);
   }
 
 });
@@ -115,9 +116,13 @@ function startGameInterval(roomName) {
       if(!winner){
         emitGameState(roomName, state[roomName]);
       }else{
-        emitGameOver(roomName, parseInt(winner));
-        state[roomName] = null;
-        clearInterval(intervalId);
+        emitGameState(roomName, state[roomName]);
+        setTimeout(()=>{
+          emitGameOver(roomName, parseInt(winner));
+          state[roomName] = null;
+          clearInterval(intervalId);
+        },500);
+        
       }
 
   },1000/FRAME_RATE);
@@ -143,6 +148,11 @@ function emitPlayerCount(room,count) {
 function emitStartGame(room) {
   io.sockets.in(room)
     .emit('startGame',1);
+}
+
+function emitTurn(room,turn) {
+  io.sockets.in(room)
+    .emit('playerTurn',turn);
 }
 
 const port = process.env.PORT || 3000;
