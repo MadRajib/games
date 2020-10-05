@@ -58,7 +58,7 @@ function joinGame() {
 
 }
 
-const socket = io('http://13892a6d8d17.ngrok.io');
+const socket = io('https://chain-reaction-multi.herokuapp.com/');
 
 socket.on('init',handleInit);
 socket.on('gameCode',handleGameCode);

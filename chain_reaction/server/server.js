@@ -145,4 +145,6 @@ function emitStartGame(room) {
     .emit('startGame',1);
 }
 
-io.listen(3000);
+const port = process.env.PORT || 3000;
+console.log("Server listening at",port);
+io.listen(port);
