@@ -59,9 +59,9 @@ function joinGame() {
   startGameBtn.style.display = "none";
 }
 
-// const socket = io('https://chain-reaction-multi.herokuapp.com/');
+const socket = io('https://chain-reaction-multi.herokuapp.com/');
 
-const socket = io('http://localhost:3000/');
+// const socket = io('http://localhost:3000/');
 socket.on('init',handleInit);
 socket.on('gameCode',handleGameCode);
 socket.on('gameState',handleGameState);
