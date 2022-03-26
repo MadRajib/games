@@ -1,0 +1,35 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <!-- uncomment lines below to include extra p5 libraries -->
+  <!--<script language="javascript" src="libraries/p5.dom.js"></script>-->
+  <!--<script language="javascript" src="libraries/p5.sound.js"></script>-->
+  
+  <!-- this line removes any default padding and style. you might only need one of these values set. -->
+  <style> body { padding: 3%; margin: 0; text-align:center; background-color: #335c67;} canvas {opacity: 1; border: 10px solid #fff;}
+  </style>
+</head>
+
+<body>
+  <div>
+    <div>
+      <h3 id ="game_level_bar">Level 1</h3>
+    </div>
+    <div>
+      <button id="start_game" onclick="start_game_btn_clicked()">Start</button>
+      <button id="reset_game" onclick="reset_game_btn_clicked()">Reset</button>
+    </div>
+    <div id="game_canvas_container">
+      
+    </div>
+    <div>
+      <h3 id ="game_status_bar"></h3>
+    </div>
+  </div>
+  <script language="javascript" type="text/javascript" src="patter.js"></script>
+  <script language="javascript" type="text/javascript" src="game.js"></script>
+  <script language="javascript" type="text/javascript" src="board.js"></script>
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+</body>
+</html>
