@@ -35,7 +35,7 @@ char_pos_list.forEach(dim => {
 });
 
 function preload() {
-    sprite_list.push({pos:char_pos_list[0], size:70, type : "a_1_1", src : loadImage('sprites/A_1.png'),aspratio: 0.43478260869565216});
+    sprite_list.push({pos:char_pos_list[0], size:70, type : "a_1_1", src : loadImage('sprites/a_1.png'),aspratio: 0.43478260869565216});
     sprite_list.push({pos:char_pos_list[1], size: 50, type : "a_1_2", src : loadImage('sprites/A_2.png'),aspratio: 0.5876288659793815});
     sprite_list.push({pos:char_pos_list[2], size: 40, type : "n_1_1", src : loadImage('sprites/n_1.png'),aspratio: 0.71951219512195126});
     sprite_list.push({pos:char_pos_list[3], size: 40, type : "n_1_2", src : loadImage('sprites/n_2.png'),aspratio: 0.5180722891566265});
